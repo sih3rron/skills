@@ -68,7 +68,17 @@ Run these in parallel once Step 1 results are back:
 
 1. **Gong full transcripts** — use `read_document` with `urls: [<gong_url_1>, <gong_url_2>]` for the 2 most recent calls. Extract: confirmed requirements, pain points, objections, agreed next steps, named attendees.
 
-2. **Slack dealroom threads** — the channel is usually `dealroom-<accountname>` (lowercase, hyphens). Search with `app="slack", channel="dealroom-<accountname>"`. Then use `read_document` on any threads that look substantive (multi-reply threads, manager feedback, post-meeting debriefs).
+2. **Slack dealroom threads** — channel naming is inconsistent across the org. Run three searches in parallel covering the known variants (all lowercase, spaces replaced with hyphens):
+
+   ```
+   search(query="<AccountName>", app="slack", channel="dealroom-<accountname>")
+   search(query="<AccountName>", app="slack", channel="<accountname>-dealroom")
+   search(query="<AccountName>", app="slack", channel="deal-room-<accountname>")
+   ```
+
+   If none of those return results, fall back to a general Slack search without a channel filter and look for any channel whose name contains the account name and a variant of "dealroom" or "deal-room". Note in the brief which channel name was found.
+
+   Once the channel is identified, use `read_document` on any threads that look substantive (multi-reply threads, manager feedback, post-meeting debriefs).
 
 3. **Salesforce opportunities** — the search result snippets usually contain JSON. Parse out: Stage, Amount, Close Date, Description, Manager's Notes, Last Activity, created contacts.
 
