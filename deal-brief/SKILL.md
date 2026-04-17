@@ -15,6 +15,22 @@ Produces a dated, cited deal review brief for a named account. All data comes fr
 Glean (`user-Glean` MCP server) — Gong, Salesforce, and Slack. Always include source
 links and dates so the user can judge recency.
 
+## Audience & tone
+
+**Readers:** SEs, AEs, and Sales Leadership doing pre-call prep or deal reviews.
+They want signal, not prose. Write accordingly:
+
+- **Terse over verbose** — one clause per bullet, no scene-setting sentences
+- **No filler** — cut "it's worth noting that", "importantly", "as mentioned above"
+- **Shorthand is fine** where unambiguous — "SF" for Salesforce, "opp" for opportunity,
+  "EB" for economic buyer, "DRI" for directly responsible individual
+- **Lead with the fact** — "No confirmed champion" not "It appears that a champion has
+  not yet been formally identified"
+- **Quotes over paraphrase** — if the customer said it clearly in a Gong call, quote it
+  directly rather than summarising; it's faster to read and harder to misinterpret
+- **Numbers over adjectives** — "$47K ARR, 175 seats, 114% activation" not
+  "a healthy enterprise account with good adoption"
+
 ---
 
 ## Step 0 — Confirm the account name
