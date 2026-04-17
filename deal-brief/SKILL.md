@@ -212,12 +212,9 @@ include generic risks that apply to any deal.
 
 After writing the brief in chat, ask:
 
-> "Would you like me to export this brief anywhere?
-> 1. **Miro board** — build it as a structured board with a frame per section
-> 2. **Markdown file** — save it as a `.md` file locally
-> 3. **Neither** — chat output is fine"
+> "Want me to push this to a Miro board? (Say 'yes', 'markdown' for a local file, or 'no' to keep it here.)"
 
-Wait for their choice, then:
+Treat a bare "yes" or no response as Miro. Only prompt for clarification if the answer is ambiguous. Then:
 
 ### Option 1 — Miro board
 Read the `miro-geometry` skill (`~/.claude/skills/miro-geometry/SKILL.md`) before placing
