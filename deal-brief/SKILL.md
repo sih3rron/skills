@@ -202,7 +202,7 @@ include generic risks that apply to any deal.
 
 - **Always cite**: every substantive claim gets a source (Gong URL, Salesforce URL, or Slack URL) and a date.
 - **Freshness indicators** — apply to every cited source:
-  - `🟢 < 3 months` — current, use freely
+  - `🟢 < 3 months` — current; always note the date
   - `🟡 3–6 months` — recent, note the date
   - `🟠 6–12 months` — aging, flag explicitly and treat with caution
   - `🔴 12+ months` — stale, include only if nothing more recent exists and mark clearly as stale
