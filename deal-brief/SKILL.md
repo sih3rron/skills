@@ -180,21 +180,44 @@ After writing the brief in chat, ask:
 Wait for their choice, then:
 
 ### Option 1 — Miro board
-Read the `miro-mcp` skill (`~/.claude/plugins/cache/miro-ai/miro-solutions/1.0.0/skills/miro-mcp/SKILL.md`)
-and the `miro-geometry` skill (`~/.claude/skills/miro-geometry/SKILL.md`) before placing
-anything on the board. Follow their layout guidance to avoid overlap and containment errors.
+Read the `miro-geometry` skill (`~/.claude/skills/miro-geometry/SKILL.md`) before placing
+anything on the board. Follow its layout guidance to avoid overlap and containment errors.
 
-Structure the board as one frame per brief section, arranged left to right:
-- Account Snapshot
-- Open Opportunities
-- Key Contacts
-- Requirements
-- Pain Points & Context
-- Strategic Context
-- Watch-outs
+Use the `user-miro-mcp` MCP server. Read tool schemas from
+`~/.cursor/projects/empty-window/mcps/user-miro-mcp/tools/` before calling any tool.
 
-Use the account name as the board title. Link back to Salesforce and Gong URLs
-as card links or sticky note footnotes where relevant.
+#### Layout
+
+Create the Doc first (placed at `x=0, y=0`), then place tables to the right with
+sufficient spacing to avoid overlap. Doc width is typically 600–800px; use a minimum
+gap of 300px before the first table. Stagger tables vertically if there are multiple.
+
+```
+Doc (x=0, y=0)  |  300px gap  |  Table 1 (x=1100, y=0)
+                               |  Table 2 (x=1100, y=600)
+```
+
+#### Doc (`doc_create`)
+
+- The Doc is the primary narrative — all sections, citations, and context go here
+- `doc_create` does NOT support tables or code blocks — convert all tables to bullet lists
+- For each section that has tabulated data (Account Snapshot, Opportunities, Contacts),
+  add a markdown link in the Doc pointing to the corresponding table widget on the board:
+  `[View as table](https://miro.com/app/board/<board_id>/?moveToWidget=<widget_id>)`
+- The widget URL is returned by `table_create` in the `miro_url` field — use it
+
+#### Tables (`table_create`)
+
+Create one table per structured data section. Recommended tables:
+
+1. **Account Snapshot** — columns: Field, Detail
+2. **Open Opportunities** — columns: Opportunity, Stage, Value, Close Date, Updated
+3. **Key Contacts** — columns: Name, Title, Email
+
+Place each table to the right of the Doc. After creating each table, go back and add
+the `?moveToWidget=<widget_id>` deep-link into the corresponding Doc section.
+
+Use the account name as the board name.
 
 ### Option 2 — Markdown file
 Ask the user where to save it if not obvious from context, defaulting to `~/Desktop/<AccountName>-deal-brief.md`.
