@@ -58,7 +58,7 @@ search(query="<AccountName>", app="slack",      sort_by_recency=true)
 
 Vet results before using them:
 - **Relevance**: does the result actually relate to this account, or just contain the name as a keyword?
-- **Freshness**: flag results older than 6 months; exclude anything older than 12 months unless there is nothing more recent.
+- **Freshness**: prefer results < 3 months; flag anything 3–6 months; treat 6–12 months with caution; exclude 12+ months unless nothing more recent exists.
 
 ---
 
@@ -201,7 +201,11 @@ include generic risks that apply to any deal.
 ## Output rules
 
 - **Always cite**: every substantive claim gets a source (Gong URL, Salesforce URL, or Slack URL) and a date.
-- **Freshness indicators**: ✅ < 6 months, ⚠️ 6–12 months, ❌ > 12 months.
+- **Freshness indicators** — apply to every cited source:
+  - `🟢 < 3 months` — current, use freely
+  - `🟡 3–6 months` — recent, note the date
+  - `🟠 6–12 months` — aging, flag explicitly and treat with caution
+  - `🔴 12+ months` — stale, include only if nothing more recent exists and mark clearly as stale
 - **Do not fabricate**: if a field is not found in any source, write "not found" — do not infer or guess.
 - **Vetting**: exclude Gong calls where the account name appears only in passing (e.g. mentioned as a reference in a call about a different account).
 - Write the brief directly in chat first, then proceed to Step 4.
