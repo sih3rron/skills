@@ -129,31 +129,55 @@ Use the template below. Include every section even if some data is missing — n
 *Source + date for each item*
 
 Numbered list. Direct quotes from Gong or Salesforce description where available.
-Note which items are confirmed vs inferred.
+Note which items are confirmed vs inferred. **Cap at 6 items** — if more exist,
+prioritise: (1) explicitly stated by the customer, (2) repeated across multiple calls,
+(3) most recently mentioned.
 
 ---
 
 ### Supporting Context & Pain Points
 *Source + date for each item*
 
-Bullet list. Focus on: specific pain points named, competitor mentions, feature gaps,
-workflow constraints, strategic priorities.
+Bullet list. **Cap at 5–7 items.** If there are many Gong calls, do not summarise
+every call — instead extract the pain points that are:
+- Named explicitly by the customer (not inferred by Miro team)
+- Repeated across more than one call or source
+- Specific and actionable (e.g. "trainees find swim lane creation slower than Visio"
+  not "they want better diagramming")
+
+Deprioritise: vague statements, Miro-team observations without customer confirmation,
+points only mentioned in passing.
 
 ---
 
 ### Strategic Context
 *Source: #dealroom-[account] Slack*
 
-Bullet list, newest first. Include: deal stage transitions, manager coaching notes,
-positioning flags, open questions about C-level ownership or business objective.
-Include Slack links.
+Bullet list, newest first. **Cap at 6 items.** Focus on: deal stage transitions,
+manager coaching notes, positioning flags, open questions about C-level ownership
+or business objective. Include Slack links. Skip Rattle bot messages unless they
+signal a meaningful stage change.
 
 ---
 
 ### Key Watch-outs
-Numbered list. Flag: missing business objective, unknown executive sponsor,
-stage discrepancies between Salesforce and Rattle/Slack, scope creep risks,
-items agreed to be kept for a separate session.
+Numbered list. **Cap at 5 items — ruthlessly prioritise.** These are the flags an SE
+must know before walking into a call. Derive them by cross-referencing sources:
+
+- **Stage vs. activity mismatch** — compare Salesforce stage against the most recent
+  Gong next steps. If the stage implies progression but Gong shows unresolved discovery
+  questions or no follow-up, flag it.
+- **Champion / economic buyer gaps** — check Salesforce `Have Champion` and
+  `Have Economic Buyer` fields. If either is false, flag it.
+- **Scope creep signals** — if Gong calls reference technical asks (custom apps, APIs,
+  integrations) that go beyond the stated opportunity, flag the risk.
+- **Stale next steps** — if the most recent Gong call agreed a next step that has no
+  evidence of follow-through in Slack or subsequent calls, flag it.
+- **AI / compliance gates** — if the customer mentioned approval boards, security reviews,
+  or procurement processes in any call, flag these as potential blockers.
+
+Only include a watch-out if there is a specific piece of evidence for it. Do not
+include generic risks that apply to any deal.
 ```
 
 ---
