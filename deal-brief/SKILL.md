@@ -95,17 +95,17 @@ Use the template below. Include every section even if some data is missing — n
 ---
 
 ### Account Snapshot
-| Field | Detail |
-|---|---|
-| Account | |
-| Industry | |
-| Employees | |
-| Region / GEO | |
-| AE | |
-| Account Manager | |
-| SE | |
-| Current licence | |
-| ICP Bucket | |
+| Field | Source | Detail |
+|---|---|---|
+| Account | Salesforce account record — `Account Name` | |
+| Industry | Salesforce account record — `Industry` | |
+| Employees | Salesforce account record — `Employees` | |
+| Region / GEO | Salesforce account record — `GEO` / `Region` | |
+| AE | Salesforce account record — `AE` | |
+| Account Manager | Salesforce account record — `Account Owner` | |
+| SE | Salesforce account record — `EISR`, or SE participant named in Gong calls | |
+| Current licence | Salesforce account record — `Total Enterprise Licenses Contracted` and `Enterprise ARR` | |
+| ICP Bucket | Salesforce account record — `ICP Bucket` | |
 
 ---
 
@@ -201,10 +201,8 @@ Doc (x=0, y=0)  |  300px gap  |  Table 1 (x=1100, y=0)
 
 - The Doc is the primary narrative — all sections, citations, and context go here
 - `doc_create` does NOT support tables or code blocks — convert all tables to bullet lists
-- For each section that has tabulated data (Account Snapshot, Opportunities, Contacts),
-  add a markdown link in the Doc pointing to the corresponding table widget on the board:
-  `[View as table](https://miro.com/app/board/<board_id>/?moveToWidget=<widget_id>)`
-- The widget URL is returned by `table_create` in the `miro_url` field — use it
+- Where a section has a corresponding table, leave a placeholder comment in the Doc
+  content (e.g. `[table link — see link-back pass below]`) so you know where to insert it
 
 #### Tables (`table_create`)
 
@@ -214,11 +212,24 @@ Create one table per structured data section. Recommended tables:
 2. **Open Opportunities** — columns: Opportunity, Stage, Value, Close Date, Updated
 3. **Key Contacts** — columns: Name, Title, Email
 
-Place each table to the right of the Doc. After creating each table, go back and add
-the `?moveToWidget=<widget_id>` deep-link into the corresponding Doc section.
+Place each table to the right of the Doc.
+
+#### Link-back pass (`doc_update`) — do this last
+
+Once all tables are created and their `miro_url` values are known, make a single
+`doc_update` call to replace each placeholder with the real deep-link:
+
+`[View as table](<miro_url returned by table_create>)`
+
+Do this as one final step after all tables exist — not inline during Doc creation —
+to avoid editing the Doc multiple times and risking missed or broken links.
 
 Use the account name as the board name.
 
 ### Option 2 — Markdown file
-Ask the user where to save it if not obvious from context, defaulting to `~/Desktop/<AccountName>-deal-brief.md`.
-Write the brief verbatim from chat using the Write file tool.
+Always ask the user where to save the file before writing:
+
+> "Where would you like me to save the Markdown file? (e.g. Desktop, a specific project folder)"
+
+Write the brief verbatim from chat to the path they specify using the Write file tool.
+Do not assume a default path.
