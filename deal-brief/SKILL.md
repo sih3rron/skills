@@ -164,4 +164,38 @@ items agreed to be kept for a separate session.
 - **Freshness indicators**: ✅ < 6 months, ⚠️ 6–12 months, ❌ > 12 months.
 - **Do not fabricate**: if a field is not found in any source, write "not found" — do not infer or guess.
 - **Vetting**: exclude Gong calls where the account name appears only in passing (e.g. mentioned as a reference in a call about a different account).
-- Write the brief directly in chat — no canvas needed.
+- Write the brief directly in chat first, then proceed to Step 4.
+
+---
+
+## Step 4 — Export hook
+
+After writing the brief in chat, ask:
+
+> "Would you like me to export this brief anywhere?
+> 1. **Miro board** — build it as a structured board with a frame per section
+> 2. **Markdown file** — save it as a `.md` file locally
+> 3. **Neither** — chat output is fine"
+
+Wait for their choice, then:
+
+### Option 1 — Miro board
+Read the `miro-mcp` skill (`~/.claude/plugins/cache/miro-ai/miro-solutions/1.0.0/skills/miro-mcp/SKILL.md`)
+and the `miro-geometry` skill (`~/.claude/skills/miro-geometry/SKILL.md`) before placing
+anything on the board. Follow their layout guidance to avoid overlap and containment errors.
+
+Structure the board as one frame per brief section, arranged left to right:
+- Account Snapshot
+- Open Opportunities
+- Key Contacts
+- Requirements
+- Pain Points & Context
+- Strategic Context
+- Watch-outs
+
+Use the account name as the board title. Link back to Salesforce and Gong URLs
+as card links or sticky note footnotes where relevant.
+
+### Option 2 — Markdown file
+Ask the user where to save it if not obvious from context, defaulting to `~/Desktop/<AccountName>-deal-brief.md`.
+Write the brief verbatim from chat using the Write file tool.
